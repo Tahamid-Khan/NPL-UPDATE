@@ -9,16 +9,19 @@ use App\Http\Controllers\RegistrationController;
 
 // Home routes
 // Route::redirect('/', '/login')->name('home');
-Route::redirect('/', '/register_npl_Trianing')->name('home');
-Route::redirect('/register', '/register_npl_Trianing')->name('register');
+//Default route of registration form
+// Route::redirect('/', '/register_npl_mgt')->name('home');
+// Route::redirect('/register', '/register_npl_mgt')->name('register');
+Route::redirect('/', '/registration/closed')->name('home');
+ Route::redirect('/register', 'registration/closed')->name('register');
 Route::get('/login', function () {
     abort(404);
 });
-
-// route::get('/about',[HomeController::class,'about'])->name('about');
-// route::get('/news-events',[HomeController::class,'newsevent'])->name('newsevent');
-// route::get('/executive-committee',[HomeController::class,'executivecommittee'])->name('executivecommittee');
-// route::get('/contact-us',[HomeController::class,'contactus'])->name('contactus');
+//closed registration
+Route::get('/registration/closed', [RegistrationController::class, 'closed'])->name('registration.closed');
+// Export route without middleware
+Route::get('/registrations/export', [RegistrationController::class, 'export'])
+    ->name('admin.registrations.export');
 
 // Add these routes to your web.php file
 Route::get('/admin/registrations/filter-by-date', [RegistrationController::class, 'filterByDateRange'])
@@ -29,15 +32,10 @@ Route::get('/admin/registrations/search', [RegistrationController::class, 'searc
     ->name('admin.registrations.search');
 
 // Registration routes
-Route::get('/register_npl_Trianing', [RegistrationController::class, 'showForm'])->name('registration.form');
+Route::get('/register_npl_mgt', [RegistrationController::class, 'showForm'])->name('registration.form');
 Route::post('/register/store', [RegistrationController::class, 'store'])->name('registration.store');
 Route::get('/register/success', [RegistrationController::class, 'success'])->name('registration.success');
 // Route::get('/registrations', [RegistrationController::class, 'index'])->name('registration.index');
-
-// Admin routes
-// Route::get('admin/dashboard', [AdminuserauthController::class, 'index'])->name('adminlogin');
-// Route::get('/admin/registrations', [RegistrationController::class, 'adminIndex'])->name('admin.registrations');
-// Route::get('/admin/registered-users', [AdminuserauthController::class, 'adminRegisteredUsers'])->name('admin.registered-users');
 
 // Admin user management routes
 Route::get('/admin/users/{user}/edit', [AdminuserauthController::class, 'editUser'])->name('admin.users.edit');
@@ -54,15 +52,19 @@ Route::get('/admin/reports/event-financial', [ReportController::class, 'download
 Route::get('/admin/registrations/download', [RegistrationController::class, 'downloadPDF'])
     ->name('admin.registrations.download');
 
+// Excel file download - Updated to use the correct controller
+Route::get('/admin/registrations/export', [RegistrationController::class, 'export'])
+    ->name('admin.registrations.export');
+
 // Auth routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('admin/dashboard', [AdminuserauthController::class, 'index'])->name('adminlogin');
-Route::get('/admin/npl', [RegistrationController::class, 'adminIndex'])->name('admin.registrations');
-Route::get('/admin/registered-users', [AdminuserauthController::class, 'adminRegisteredUsers'])->name('admin.registered-users');
+    
+    Route::get('/admin/npl', [RegistrationController::class, 'adminIndex'])->name('admin.registrations');
+    Route::get('/admin/registered-users', [AdminuserauthController::class, 'adminRegisteredUsers'])->name('admin.registered-users');
 });
 
 require __DIR__.'/auth.php';
-

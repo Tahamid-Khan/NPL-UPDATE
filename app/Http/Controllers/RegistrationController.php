@@ -1,11 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Exports\RegistrationsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Barryvdh\DomPDF\Facade\Pdf;
 class RegistrationController extends Controller
 {
    
@@ -18,6 +19,15 @@ class RegistrationController extends Controller
         return view('registration.form');
     }
 
+
+        /**
+     * Display registration closed page.
+     */
+    public function closed()
+    {
+        return view('registration.registraton_close');
+    }
+    
     /**
      * Store a new registration.
      */
@@ -209,6 +219,24 @@ public function downloadPDF(Request $request)
     
     return $pdf->download($filename);
 }
+/**
+ * Download registrations as Excel.
+ */
+/**
+ * Download registrations as Excel.
+ */
+/**
+ * Download registrations as Excel in descending order by ID.
+ */
+public function export(Request $request)
+{
+    // Fetch registrations in descending order by ID (from last to first)
+    $registrations = Registration::orderBy('id', 'desc')->get();
+    
+    return Excel::download(new RegistrationsExport($registrations), 'registrations.xlsx');
+}
+
+
 
 
 }

@@ -6,6 +6,7 @@
     <title>Registered Participants - NPL</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="{{ asset('css/r_indexfile.css') }}">   
     <style>
         :root {
             --primary-color: #0d6efd;
@@ -18,118 +19,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px 0;
         }
-        .registrations-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-        .registrations-header {
-            background: #cbaf61;
-            color: white;
-            padding: 20px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .registrations-header h2 {
-            margin: 0;
-            font-weight: 600;
-        }
-        .table-responsive {
-            padding: 0;
-        }
-        .table {
-            margin-bottom: 0;
-        }
-        .table th {
-            background-color: var(--primary-light);
-            color: var(--primary-dark);
-            font-weight: 600;
-            border-bottom: 2px solid var(--primary-color);
-        }
-        .table td, .table th {
-            padding: 15px 20px;
-            vertical-align: middle;
-        }
         
-        /* Enhanced Pagination Styling */
-        .pagination-container {
-            margin-top: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-            padding: 15px;
-        }
-        .pagination {
-            margin: 0;
-            justify-content: center;
-        }
-        .page-item:first-child .page-link {
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-        }
-        .page-item:last-child .page-link {
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
-        }
-        .page-link {
-            color: #555;
-            border: none;
-            padding: 10px 16px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        .page-link:hover {
-            background-color: #f0f0f0;
-            color: var(--primary-color);
-            z-index: 1;
-        }
-        .page-item.active .page-link {
-            background-color: #cbaf61;
-            border-color: #cbaf61;
-            color: white;
-            box-shadow: 0 4px 10px rgba(203, 175, 97, 0.3);
-        }
-    
-        .page-link[rel="next"], .page-link[rel="prev"] {
-        font-size: 20px;
-        font-weight: bold;
-        line-height: 1;
-    }
-        .page-item.disabled .page-link {
-            color: #ccc;
-        }
-        .pagination-info {
-            text-align: center;
-            color: #777;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-        
-        .btn-add {
-            background-color: white;
-            color: #cbaf61;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        .btn-add:hover {
-            background-color: #b69d55;
-            color: white;
-        }
-        .empty-state {
-            text-align: center;
-            padding: 50px 20px;
-        }
-        .empty-icon {
-            font-size: 60px;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
